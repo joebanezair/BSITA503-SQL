@@ -1,0 +1,56 @@
+use BSITA503;
+
+create table ref1(
+  ref_number int primary key not null,
+  ref_name varchar(50)
+);
+
+create table ref2(
+   primary_id int, 
+   ref_number int, 
+   PRIMARY KEY(primary_id),
+   FOREIGN KEY (ref_number) REFERENCES ref1(ref_number)
+);
+
+drop table ref2;
+insert into ref1 values (2000,'Joebanezair');
+insert into ref1 values (2001,'Za-ir');
+insert into ref1 values (2002,'Zair');
+
+insert into ref2 values(2004,2003);
+
+select * from ref2,  ref1 ; 
+
+text :
+
+yung foreign key restrictions para di maulit yung input,
+primary key uniqueness ng input. 
+bale hindi ka makakapag input sa foreign key 
+kung walang same input galing sa primary key
+
+The FOREIGN KEY constraint prevents invalid data from being inserted 
+into the foreign key column, because 
+it has to be one of the values contained in the parent table.
+
+JOIN - kelangan at-least one specified column per table.
+JOIN - para lang sa select statement
+----------------------------------------------------
+select ref1.ref_number, ref2.primary_id, ref1.ref_name
+from ref1
+INNER JOIN ref2 on ref1.ref_number = ref2.primary_id;
+
+select ref1.ref_number, ref2.primary_id, ref1.ref_name
+from ref2
+INNER JOIN ref1 on ref2.primary_id = ref1.ref_number ;
+
+>> eto pag dalawang primary key, puro unique values and lalabas
+>> walang pinagbago kahit balibaliktarin
+
+
+select ref1.ref_name, ref2.primary_id
+from ref1
+INNER JOIN ref2 on ref1.ref_number = ref2.ref_number;
+
+select ref1.ref_name, ref2.ref_number
+from ref1
+INNER JOIN ref2 on ref1.ref_number = ref2.ref_number;
