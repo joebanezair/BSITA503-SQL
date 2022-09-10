@@ -54,3 +54,4 @@ INNER JOIN ref2 on ref1.ref_number = ref2.ref_number;
 select ref1.ref_name, ref2.ref_number
 from ref1
 INNER JOIN ref2 on ref1.ref_number = ref2.ref_number;
+
